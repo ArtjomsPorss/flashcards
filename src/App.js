@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-const fs = require('fs');
+import axios from 'axios';
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -44,9 +44,19 @@ function App() {
     console.log(`Updated flashcard ${flashcards[index].id} counter: ${flashcards[index].counter}`);
   };
 
+  const saveFlashcards = (flashcards) => {
+    axios.post('http://localhost:5000/saveFlashcards', flashcards)
+      .then(response => {
+        console.log(response.data.message);
+      })
+      .catch(error => {
+        console.error('Error saving flashcards:', error);
+      });
+  };
+
   useEffect(() => {
     console.log("writing to file");
-    fs.writeFile("/flashcards.json", flashcards);
+    saveFlashcards(flashcards);
   }, [flashcards]);
 
   if (flashcards.length === 0) {
