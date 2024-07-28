@@ -3,13 +3,13 @@
     "id": 1,
     "front": "What is the capital of France?",
     "back": "Paris",
-    "counter": 0
+    "counter": 9
   },
   {
     "id": 2,
     "front": "What is 2 + 2?",
     "back": "4",
-    "counter": 0
+    "counter": 6
   },
   {
     "id": 3,

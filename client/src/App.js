@@ -16,7 +16,13 @@ function App() {
   const handleCardClick = () => {
     setShowAnswer(!showAnswer);
     console.log("handling card click");
-    incrementCounter(currentCardIndex);
+    incrementCounter(currentCardIndex)
+    .then((updatedFlashcards) => {
+      saveFlashcards(updatedFlashcards);
+    })
+    .catch((error) => {
+      console.error('error incrementing counter')
+    });
   };
 
   const handleNextClick = () => {
@@ -26,14 +32,17 @@ function App() {
   };
 
   const incrementCounter = (index) => {
-    var counter = flashcards[index].counter + 1;
-    console.log("about to increment counter");
-    setFlashcards(prevFlashcards => {
-      console.log("incrementing counter 1");
-      const updatedFlashcards = [...prevFlashcards];
-      console.log("incrementing counter 2");
-      updatedFlashcards[index].counter = counter;
-      return updatedFlashcards;
+    return new Promise((resolve) => {
+      var counter = flashcards[index].counter + 1;
+      console.log("about to increment counter");
+      setFlashcards(prevFlashcards => {
+        console.log("incrementing counter 1");
+        const updatedFlashcards = [...prevFlashcards];
+        console.log("incrementing counter 2");
+        updatedFlashcards[index].counter = counter;
+        resolve(updatedFlashcards);
+        return updatedFlashcards;
+      });
     });
 
     // Simulate saving updated counter to backend or JSON file
@@ -44,17 +53,12 @@ function App() {
   const saveFlashcards = (flashcards) => {
     axios.post('http://localhost:5000/saveFlashcards', flashcards)
       .then(response => {
-        console.log(response.data.message);
+        console.log('Flashcards saved:', response.data.message);
       })
       .catch(error => {
         console.error('Error saving flashcards:', error);
       });
   };
-
-  useEffect(() => {
-    console.log("writing to file");
-    saveFlashcards(flashcards);
-  }, [flashcards]);
 
   if (flashcards.length === 0) {
     return <div>Loading...</div>;

@@ -6,7 +6,8 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 5000;
-const DATA_FILE = path.join(__dirname, './flashcards1.json');
+const DATA_FILE = path.join(__dirname, './flashcards.json');
+// const DATA_FILE = path.join(__dirname, './../client/src/flashcards.json');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -21,6 +22,18 @@ app.post('/saveFlashcards', (req, res) => {
       return res.status(500).json({ error: 'Failed to save flashcards' });
     }
     res.json({ message: 'Flashcards saved successfully' });
+  });
+});
+
+// Endpoint to read flashcards
+app.get('/getFlashcards', (req, res) => {
+  fs.readFile(DATA_FILE, (err, data) => {
+    if (err) { 
+      console.error('Server failed to read flashcards');
+      throw err;
+    }
+    console.log('server read flashcard data:', data);
+    res.json(data);
   });
 });
 
