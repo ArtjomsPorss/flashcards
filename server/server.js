@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 const PORT = 5000;
-const DATA_FILE = path.join(__dirname, '../public/flashcards1.json');
+const DATA_FILE = path.join(__dirname, './flashcards1.json');
 
 app.use(bodyParser.json());
 app.use(cors());

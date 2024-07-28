@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "front": "What is the capital of France?",
+    "back": "Paris",
+    "counter": 4
+  },
+  {
+    "id": 2,
+    "front": "What is 2 + 2?",
+    "back": "4",
+    "counter": 2
+  },
+  {
+    "id": 3,
+    "front": "What is the largest planet in our solar system?",
+    "back": "Jupiter",
+    "counter": 3
+  }
+]

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import flashcardsData from "./flashcards.json";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -9,11 +10,7 @@ function App() {
 
   useEffect(() => {
     console.log("fetching flashcards from json");
-    // Fetching the flashcards data from the JSON file
-    fetch('/flashcards.json')
-      .then(response => response.json())
-      .then(data => setFlashcards(data))
-      .catch(error => console.error('Error fetching flashcards:', error));
+    setFlashcards(flashcardsData);
   }, []);
 
   const handleCardClick = () => {
