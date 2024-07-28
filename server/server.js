@@ -32,8 +32,13 @@ app.get('/getFlashcards', (req, res) => {
       console.error('Server failed to read flashcards');
       throw err;
     }
-    console.log('server read flashcard data:', data);
-    res.json(data);
+    try {
+      var data = JSON.parse(data);
+      res.json(data);
+    } catch (error) {
+      console.error('Problem parsing read data:', data);
+      throw error;
+    }
   });
 });
 

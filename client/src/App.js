@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import flashcardsData from "./flashcards.json";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -9,8 +8,10 @@ function App() {
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
-    console.log("fetching flashcards from json");
-    setFlashcards(flashcardsData);
+    getFlashcards()
+    .then((data) => {
+      setFlashcards(data);
+    });
   }, []);
 
   const handleCardClick = () => {
@@ -34,20 +35,13 @@ function App() {
   const incrementCounter = (index) => {
     return new Promise((resolve) => {
       var counter = flashcards[index].counter + 1;
-      console.log("about to increment counter");
       setFlashcards(prevFlashcards => {
-        console.log("incrementing counter 1");
         const updatedFlashcards = [...prevFlashcards];
-        console.log("incrementing counter 2");
         updatedFlashcards[index].counter = counter;
         resolve(updatedFlashcards);
         return updatedFlashcards;
       });
     });
-
-    // Simulate saving updated counter to backend or JSON file
-    // In a real-world scenario, you would send this data to a server
-    console.log(`Updated flashcard ${flashcards[index].id} counter: ${flashcards[index].counter}`);
   };
 
   const saveFlashcards = (flashcards) => {
@@ -59,6 +53,19 @@ function App() {
         console.error('Error saving flashcards:', error);
       });
   };
+
+  const getFlashcards = (flashcards) => {
+    return axios.get('http://localhost:5000/getFlashcards')
+    .then(response => {
+      console.log('Success getFlashcards:', response.data);
+      return response.data;
+    })
+    .catch(error => {
+      console.error('Error getting flashcards:', error);
+      throw error;
+    });
+  };
+
 
   if (flashcards.length === 0) {
     return <div>Loading...</div>;
