@@ -26,3 +26,12 @@
         - 7d x 2.5 x 2.5
         - etc..
     - [ ] graduated again multiplier - 0.6
+
+- [ ] no timeout - new
+- [ ] has timeout - calculate next timeout
+- [ ] sort cards for reviews
+    - [ ] cards that are late + cards with no date
+    - [ ] randomize
+
+- [ ] 
+- [ ] 

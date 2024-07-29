@@ -20,7 +20,7 @@ function App() {
     console.log("handling card click");
     incrementCounter(currentCardIndex)
     .then((updatedFlashcards) => {
-      saveFlashcards(updatedFlashcards);
+      saveFlashcards(updatedFlashcards); // TODO should be moved after setting new timeout
     })
     .catch((error) => {
       console.error('error incrementing counter')
@@ -30,6 +30,7 @@ function App() {
   const handleNextClick = () => {
     console.log("next click");
     setShowAnswer(false);
+    // TODO here goes the algorithm..
     setCurrentCardIndex((currentCardIndex + 1) % flashcards.length);
   };
 
@@ -95,10 +96,14 @@ function App() {
       <div className="flashcard" onClick={handleCardClick}>
         {showAnswer ? currentCard.back : currentCard.front}
       </div>
-      <div>
+      {
+        showAnswer === true ? 
+       <div>
         <button onClick={handleAgain}>Again</button>
         <button onClick={handleGood}>Good</button>
         </div>
+        : ''
+     }
       <div className="counter">
         Views: {currentCard.counter}
       </div>

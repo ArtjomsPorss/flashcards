@@ -2,21 +2,16 @@
   {
     "id": 1,
     "front": "What is the capital of France?",
-    "back": "Paris",
-    "counter": 11000006,
-    "state": "LEARNING",
-    "good": 0
+    "back": "Paris"
   },
   {
     "id": 2,
     "front": "What is 2 + 2?",
-    "back": "4",
-    "counter": 8
+    "back": "4"
   },
   {
     "id": 3,
     "front": "What is the largest planet in our solar system?",
-    "back": "Jupiter",
-    "counter": 1
+    "back": "Jupiter"
   }
 ]

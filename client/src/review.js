@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 /**
  * contains logic that sets next study interval
  */
@@ -6,40 +8,36 @@ export const BTTN_GOOD = 'GOOD';
 export const STATE_LEARNING = 'LEARNING';
 export const STATE_GRADUATED = 'GRADUATED';
 export const LEECH_THRESHOLD = 8;
-export const DUR_10M = '10m';
+export const DUR_10M = { minutes:10 };
+export const DUR_1D = { days:1 };
+export const DUR_3D = { days:3 };
+export const DUR_7D = { days:7 };
 export const GRADUATE_INTERVAL = 2.5;
-export const MAX_TIMEOUT = '90d';
+export const MAX_TIMEOUT = { days:90 };
 
 export const setTimeoutDate = (card, buttonPressed) => {
-    console.log('inside setTimeoutDate');
     // NEW CARD
     if (!card.state || card.state === STATE_LEARNING) {
         card.state = STATE_LEARNING;
-        console.log('setTimeoutDate learning 1');
         if (buttonPressed === BTTN_AGAIN) { // AGAIN in 10m
             setTimeout(card, DUR_10M);
             card.good = 0;
-            console.log('setTimeoutDate 2');
             return;
         } else if (!card.good || card.good === 0) { // Good x1 in 1d
-            setTimeout(card, '1d');
+            setTimeout(card, DUR_1D);
             card.good = 1;
-            console.log('setTimeoutDate 3');
             return;
         } else if (card.good < 2) { // Good x2 in 3d
-            setTimeout(card, '3d');
+            setTimeout(card, DUR_3D);
             card.good = 2;
-            console.log('setTimeoutDate 4');
             return;
         } else { // Graduate
             card.state = STATE_GRADUATED;
             card.good = 0;
-            console.log('setTimeoutDate 5');
         }
     } 
     // GRADUATED CARD
     if (card.state === STATE_GRADUATED) {
-        console.log('setTimeoutDate graduate');
         if (buttonPressed === BTTN_AGAIN) { // AGAIN
             card.good = 0; // reset good counter
             setTimeout(card, DUR_10M);
@@ -52,25 +50,35 @@ export const setTimeoutDate = (card, buttonPressed) => {
             if (card.again >= LEECH_THRESHOLD) {
                 card.tag = "too many revisions"
             }
-            console.log('setTimeoutDate again');
         } else { // GOOD
             if (!card.good || card.good === 0) {
                 card.good = 1;
-                setTimeout(card, '7d');
-                console.log('setTimeoutDate good 1');
+                setTimeout(card, DUR_7D);
             } else {
                 card.good += 1;
                 multiplyTimeout(card);
-                console.log('setTimeoutDate good 2');
             }
         }
     }
 };
 
 export const multiplyTimeout = (card) => {
-    card.timeout *= GRADUATE_INTERVAL;
+    var interval = moment().add(card.lastInterval).unix() - moment().unix();
+    interval *= GRADUATE_INTERVAL;
+    interval = {'seconds': interval};
+
+    // if interval is less than max allowed interval, set it
+    if (moment().add(MAX_TIMEOUT).isAfter(moment().add(interval))) {
+        card.lastInterval = interval;
+        card.reviewDate = moment().add(card.lastInterval);
+    } else {
+        // set the max interval
+        card.lastInterval = MAX_TIMEOUT;
+        card.reviewDate = moment().add(MAX_TIMEOUT);
+    }
 };
 
 const setTimeout = (card, timeout) => {
-    card.timeout = timeout;
+    card.reviewDate = moment().add(timeout);
+    card.lastInterval = timeout;
 };
