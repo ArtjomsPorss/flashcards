@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import { BTTN_AGAIN, BTTN_GOOD, setTimeoutDate } from './review'
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
@@ -66,6 +67,22 @@ function App() {
     });
   };
 
+  const handleAgain = () => {
+    console.log('inside handleAgain');
+    setTimeoutDate(currentCard, BTTN_AGAIN);
+    console.log('inside after setTimeoutDate');
+    handleNextClick();
+    console.log('inside after handleNextClick');
+  };
+
+  const handleGood = () => {
+    console.log('inside handleGood');
+    setTimeoutDate(currentCard, BTTN_GOOD);
+    console.log('inside after setTimeoutDate');
+    handleNextClick();
+    console.log('inside after handleNextClick');
+  };
+
 
   if (flashcards.length === 0) {
     return <div>Loading...</div>;
@@ -78,7 +95,10 @@ function App() {
       <div className="flashcard" onClick={handleCardClick}>
         {showAnswer ? currentCard.back : currentCard.front}
       </div>
-      <button onClick={handleNextClick}>Next</button>
+      <div>
+        <button onClick={handleAgain}>Again</button>
+        <button onClick={handleGood}>Good</button>
+        </div>
       <div className="counter">
         Views: {currentCard.counter}
       </div>
