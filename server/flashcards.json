@@ -2,16 +2,35 @@
   {
     "id": 1,
     "front": "What is the capital of France?",
-    "back": "Paris"
+    "back": "Paris",
+    "state": "GRADUATED",
+    "reviewDate": "2024-08-16T10:34:26.971Z",
+    "lastInterval": {
+      "seconds": 1512000
+    },
+    "good": 2
   },
   {
     "id": 2,
     "front": "What is 2 + 2?",
-    "back": "4"
+    "back": "4",
+    "state": "LEARNING",
+    "reviewDate": "2024-07-29T22:43:59.033Z",
+    "lastInterval": {
+      "minutes": 10
+    },
+    "good": 0,
+    "again": 0
   },
   {
     "id": 3,
     "front": "What is the largest planet in our solar system?",
-    "back": "Jupiter"
+    "back": "Jupiter",
+    "state": "LEARNING",
+    "reviewDate": "2024-08-01T22:34:17.576Z",
+    "lastInterval": {
+      "days": 3
+    },
+    "good": 2
   }
 ]

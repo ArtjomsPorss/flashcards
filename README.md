@@ -1,37 +1,35 @@
 # Flashcard algorithm
+Source: https://leananki.com/best-settings/
 - [x] add buttons
     - [ ] style buttons
-- [ ] any amount of new cards per day
+- [x] any amount of new cards per day
     - new info needs to be studied immediately
-- [ ] new cards
-    - [ ] again - 10 min
-    - [ ] good - 1 day
-        - [ ] good again - 3 day
-- [ ] graduation interval - 7 day
+- [x] new cards
+    - [x] again - 10 min
+    - [x] good - 1 day
+        - [x] good again - 3 day
+- [x] graduation interval - 7 day
     - 
 - [ ] questions show up in shuffled order
     - leads to stronger retention
     - dissolve boundaries between subjects
-- [ ] graduated cards
-    - [ ] relearning setp - 10 min
-    - [ ] leech threshold - 8
+- [x] graduated cards
+    - [x] relearning setp - 10 min
+    - [x] leech threshold - 8
         - how many again pressed on relearning card to make action
-        - [ ] tag leeched card
+        - [x] tag leeched card
             - leeched card should be changed or made easier
-- [ ] advanced setting
-    - [ ] maximum inerval - 365, 180 or 90 days
-    - [ ] graduated review multiplier (pressing Good on graduated card) - 2.5
+- [x] advanced setting
+    - [x] maximum inerval - 365, 180 or 90 days
+    - [x] graduated review multiplier (pressing Good on graduated card) - 2.5
         - 7d
         - 7d x 2.5
         - 7d x 2.5 x 2.5
         - etc..
-    - [ ] graduated again multiplier - 0.6
+    - [x] graduated again multiplier - 0.6
 
-- [ ] no timeout - new
-- [ ] has timeout - calculate next timeout
+- [x] no timeout - new
+- [x] has timeout - calculate next timeout
 - [ ] sort cards for reviews
     - [ ] cards that are late + cards with no date
-    - [ ] randomize
-
-- [ ] 
-- [ ] 
+        - [ ] randomize

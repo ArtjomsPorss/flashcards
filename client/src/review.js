@@ -20,8 +20,7 @@ export const setTimeoutDate = (card, buttonPressed) => {
     if (!card.state || card.state === STATE_LEARNING) {
         card.state = STATE_LEARNING;
         if (buttonPressed === BTTN_AGAIN) { // AGAIN in 10m
-            setTimeout(card, DUR_10M);
-            card.good = 0;
+            handleAgainCounter(card);
             return;
         } else if (!card.good || card.good === 0) { // Good x1 in 1d
             setTimeout(card, DUR_1D);
@@ -39,17 +38,7 @@ export const setTimeoutDate = (card, buttonPressed) => {
     // GRADUATED CARD
     if (card.state === STATE_GRADUATED) {
         if (buttonPressed === BTTN_AGAIN) { // AGAIN
-            card.good = 0; // reset good counter
-            setTimeout(card, DUR_10M);
-            // again counter for leech threshold
-            if (card.again) {
-                card.again += 1; // forgot not first time
-            } else {
-                card.again = 0; // forgot first time
-            }
-            if (card.again >= LEECH_THRESHOLD) {
-                card.tag = "too many revisions"
-            }
+            handleAgainCounter(card);
         } else { // GOOD
             if (!card.good || card.good === 0) {
                 card.good = 1;
@@ -82,3 +71,18 @@ const setTimeout = (card, timeout) => {
     card.reviewDate = moment().add(timeout);
     card.lastInterval = timeout;
 };
+
+const handleAgainCounter = (card) => {
+    card.good = 0; // reset good counter
+    setTimeout(card, DUR_10M);
+
+    // again counter for leech threshold
+    if (card.again) {
+        card.again += 1; // forgot not first time
+    } else {
+        card.again = 0; // forgot first time
+    }
+    if (card.again >= LEECH_THRESHOLD) {
+        card.tag = "too many revisions"
+    }
+}

@@ -17,17 +17,10 @@ function App() {
 
   const handleCardClick = () => {
     setShowAnswer(!showAnswer);
-    console.log("handling card click");
-    incrementCounter(currentCardIndex)
-    .then((updatedFlashcards) => {
-      saveFlashcards(updatedFlashcards); // TODO should be moved after setting new timeout
-    })
-    .catch((error) => {
-      console.error('error incrementing counter')
-    });
   };
 
   const handleNextClick = () => {
+    saveFlashcards(flashcards);
     console.log("next click");
     setShowAnswer(false);
     // TODO here goes the algorithm..

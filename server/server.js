@@ -3,11 +3,11 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const os = require('os');
 
 const app = express();
 const PORT = 5000;
-const DATA_FILE = path.join(__dirname, './flashcards.json');
-// const DATA_FILE = path.join(__dirname, './../client/src/flashcards.json');
+const DATA_FILE = path.join(os.homedir(), 'Documents', 'flashcards.json');
 
 app.use(bodyParser.json());
 app.use(cors());
