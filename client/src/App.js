@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
 import { BTTN_AGAIN, BTTN_GOOD, setTimeoutDate } from './review'
+import { shuffleDeck } from './shuffleDeck';
+
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
-  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
@@ -23,20 +24,7 @@ function App() {
     saveFlashcards(flashcards);
     console.log("next click");
     setShowAnswer(false);
-    // TODO here goes the algorithm..
-    setCurrentCardIndex((currentCardIndex + 1) % flashcards.length);
-  };
-
-  const incrementCounter = (index) => {
-    return new Promise((resolve) => {
-      var counter = flashcards[index].counter + 1;
-      setFlashcards(prevFlashcards => {
-        const updatedFlashcards = [...prevFlashcards];
-        updatedFlashcards[index].counter = counter;
-        resolve(updatedFlashcards);
-        return updatedFlashcards;
-      });
-    });
+    setFlashcards(shuffleDeck(flashcards));
   };
 
   const saveFlashcards = (flashcards) => {
@@ -82,7 +70,7 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  const currentCard = flashcards[currentCardIndex];
+  const currentCard = flashcards[0];
 
   return (
     <div className="App">
