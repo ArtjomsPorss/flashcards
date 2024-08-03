@@ -17,10 +17,10 @@ export const shuffleDeck = (cards) => {
     const now = moment();
 
     cards.forEach(card => {
-      if (!card.date) {
+      if (!card.reviewDate) {
         noDateAndDueCards.push(card);
       } else {
-        const cardDate = moment(card.date);
+        const cardDate = moment(card.reviewDate);
         if (cardDate.isBefore(now)) {
           noDateAndDueCards.push(card);
         } else {
@@ -33,7 +33,7 @@ export const shuffleDeck = (cards) => {
     shuffle(noDateAndDueCards);
 
     // Sort the future-date cards by ascending date
-    futureDateCards.sort((a, b) => moment(a.date).diff(moment(b.date)));
+    futureDateCards.sort((a, b) => moment(a.reviewDate).diff(moment(b.reviewDate)));
 
     // Concatenate the groups to form the final sorted array
     const sortedCards = [...noDateAndDueCards, ...futureDateCards];

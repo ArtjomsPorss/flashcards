@@ -10,7 +10,7 @@ Source: https://leananki.com/best-settings/
         - [x] good again - 3 day
 - [x] graduation interval - 7 day
     - 
-- [ ] questions show up in shuffled order
+- [x] questions show up in shuffled order
     - leads to stronger retention
     - dissolve boundaries between subjects
 - [x] graduated cards
@@ -30,6 +30,16 @@ Source: https://leananki.com/best-settings/
 
 - [x] no timeout - new
 - [x] has timeout - calculate next timeout
-- [ ] sort cards for reviews
-    - [ ] cards that are late + cards with no date
-        - [ ] randomize
+- [x] sort cards for reviews
+    - [x] cards that are late + cards with no date
+        - [x] randomize
+
+- [ ] tags
+    - [ ] add topic tags UI
+        - [ ] search box
+            - [ ] click - display dropdown
+            - [ ] start typing - flitered dropdown
+            - [ ] click on drpdwn element - add tag to list
+            - [ ] tag has x to delete from selection
+        - [ ] filter button to filter only cards that match selected topics
+    - [ ] select flashcard to study based on topics
